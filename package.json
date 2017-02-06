@@ -12,21 +12,18 @@
     "email": "github@svrooij.nl",
     "url": "https://svrooij.nl"
   },
-  "contributors":[
-    {
-      "name": "Navid Nikpour",
-      "email": "navid@nikpour.com"
-    },
-    {
-      "name": "Michal Krchnavy",
-      "email": "michal@krchnavy.sk",
-      "url": "http://www.krchnavy.sk"
-    }, {
-      "name":"Stephan van Rooij",
-      "email": "github@svrooij.nl",
-      "url": "https://svrooij.nl"
-    }
-  ],
+  "contributors": [{
+    "name": "Navid Nikpour",
+    "email": "navid@nikpour.com"
+  }, {
+    "name": "Michal Krchnavy",
+    "email": "michal@krchnavy.sk",
+    "url": "http://www.krchnavy.sk"
+  }, {
+    "name": "Stephan van Rooij",
+    "email": "github@svrooij.nl",
+    "url": "https://svrooij.nl"
+  }],
   "bugs": {
     "url": "https://github.com/svrooij/angular2-swagger-client-generator/issues"
   },
