@@ -1,3 +1,3 @@
-var generator = require('./lib/generator');
+var generator = require('./lib/generator')
 
-module.exports = generator;
+module.exports = generator
