@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, URLSearchParams, Headers } from '@angular/http';
 import { {{#definitions}}{{name}}{{^last}}, {{/last}}{{/definitions}} } from './models';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map'; 
+import 'rxjs/add/operator/map';
 
 
 @Injectable()
@@ -62,7 +62,7 @@ export class ApiClientService {
     // Use this methode to insert some headers that are send with each request.
     // Usefull for setting the `Autorization header` or any other header you want send with each request.
     {{#isSecure}}
-    if(!!this.authorizationHeaderValue) {
+    if(this.hasAuthorizationHeader()) {
       headers.set('Authorization',this.authorizationHeaderValue);
     }
     {{/isSecure}}
@@ -78,9 +78,9 @@ export class ApiClientService {
 	 * @method
 	 * @name hasAuthorizationHeader
 	 */
-	public hasAuthorizationHeader(): boolean {
-		return (!!this.hasAuthorizationHeader);
-	}
+   public hasAuthorizationHeader(): boolean {
+ 		return (typeof this.authorizationHeaderValue!='undefined' && this.authorizationHeaderValue.length > 0) ? true : false;
+ 	}
 
   private authorizationHeaderValue:string;
 
