@@ -137,7 +137,8 @@ var Generator = (function () {
       swagger: swagger,
       domain: (swagger.schemes && swagger.schemes.length > 0 && swagger.host) ? swagger.schemes[0] + '://' + swagger.host + (swagger.basePath || '') : '',
       methods: [],
-      definitions: []
+      definitions: [],
+      securityDefinitions: []
     }
 
     _.forEach(swagger.paths, function (api, path) {
@@ -290,6 +291,37 @@ var Generator = (function () {
 
     if (data.definitions.length > 0) { data.definitions[data.definitions.length - 1].last = true }
 
+    if (data.isSecure) { // We got some sort of securityDefinitions
+      _.forEach(swagger.securityDefinitions, function (secValue, secIndex) {
+        var secDef = {
+          name: secIndex,
+          type: secValue.type
+        }
+
+        switch (secValue.type) {
+          case 'basic':
+            secDef.isBasic = true
+            break
+          case 'oauth2':
+            secDef.isOAuth2 = true
+            secDef.flow = secValue.flow
+            secDef.authorizationUrl = secValue.authorizationUrl
+            secDef.tokenUrl = secValue.tokenUrl
+            secDef.scopes = secValue.scopes
+            break
+          case 'apiKey':
+            secDef.isApiKey = true
+            secDef.apiKeyIn = secValue.in
+            secDef.apiKeyName = secValue.name
+            break
+          default:
+            console.log('Found a undefined securityDefinition:', secValue.type)
+            return
+        }
+
+        data.securityDefinitions.push(secDef)
+      })
+    }
     return data
   }
 

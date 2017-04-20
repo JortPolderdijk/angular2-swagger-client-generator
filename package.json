@@ -1,6 +1,6 @@
 {
   "name": "@svrooij/angular2-swagger-client-generator",
-  "version": "0.0.21",
+  "version": "0.2.0",
   "description": "Angular 2 API client generator from swagger json",
   "homepage": "https://github.com/svrooij/angular2-swagger-client-generator",
   "main": "index.js",
@@ -44,7 +44,8 @@
   "license": "Apache-2.0",
   "scripts": {
     "a2apigen": "a2apigen -s swagger.json",
-    "build": "gulp"
+    "build": "gulp",
+    "install-from-source": "npm build && npm install -g"
   },
   "dependencies": {
     "gulp": "^3.9.1",

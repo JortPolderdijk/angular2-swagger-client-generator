@@ -60,11 +60,70 @@ export class ApiClientService {
 
     // Use this methode to insert some headers that are send with each request.
     // Usefull for setting the `Autorization header` or any other header you want send with each request.
+    {{#isSecure}}
+    if(!!this.authorizationHeaderValue) {
+      headers.set('Authorization',this.authorizationHeaderValue);
+    }
+    {{/isSecure}}
 
     headers.set('Content-Type','application/json');
     return headers;
   }
 
+  {{#isSecure}}
+  /**
+	 * Is the Authorization header set?
+	 *
+	 * @method
+	 * @name hasAuthorizationHeader
+	 */
+	public hasAuthorizationHeader(): boolean {
+		return (!!this.hasAuthorizationHeader);
+	}
+
+  private authorizationHeaderValue:string;
+
+  {{#securityDefinitions}}
+  {{#isBasic}}
+  /**
+  * Set the user credentials
+  * @method
+  * @name setCredentials
+  *
+  */
+  public setCredentials(username:string,password:string){
+    this.authorizationHeaderValue = 'Basic ' + btoa(username + ':' + password);
+  }
+  {{/isBasic}}
+  {{#isOAuth2}}
+  /**
+  * Set the oauth2 access token
+  * @method
+  * @name setToken{{name}}
+  *
+  */
+  public setToken{{name}}(token:string){
+    this.authorizationHeaderValue = 'Bearer '+token;
+  }
+  {{/isOAuth2}}
+  {{#isApiKey}}
+  apiKey:string;
+  /**
+  * Set the key to be used for authentication
+  * @method
+  * @name setApiKey
+  *
+  */
+  public setApiKey(key:string){
+    this.apiKey = key;
+    // This key is not used by the code.
+    // It should be send as '{{apiKeyIn}}' named '{{apiKeyName}}'
+    // Someone help with implementing?
+  }
+  {{/isApiKey}}
+
+  {{/securityDefinitions}}
+  {{/isSecure}}
 
 {{#methods}}
 	/**
