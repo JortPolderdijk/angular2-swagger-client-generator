@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, URLSearchParams, Headers } from '@angular/http';
 import { {{#definitions}}{{name}}{{^last}}, {{/last}}{{/definitions}} } from './models';
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map'; 
 
 
 @Injectable()
