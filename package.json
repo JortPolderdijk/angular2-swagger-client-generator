@@ -41,7 +41,7 @@
     "api",
     "generator"
   ],
-  "license": "APACHE",
+  "license": "Apache-2.0",
   "scripts": {
     "a2apigen": "a2apigen -s swagger.json",
     "build": "gulp"
