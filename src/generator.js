@@ -192,6 +192,8 @@ var Generator = (function () {
                 var refType = schema.items['$ref']
                 method.returns = refType.substring(refType.lastIndexOf('/') + 1) + '[]'
               }
+            } else if (schema.type == 'integer' || schema.type == 'double') {
+              method.returns = 'number'
             } else {
               method.returns = schema.type
             }
